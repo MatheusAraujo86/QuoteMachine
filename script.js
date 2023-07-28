@@ -1,3 +1,10 @@
+window.onload = go;
+function go() {
+  document.getElementById("new-quote").click(function () {
+    newQuote();
+  });
+}
+
 function newQuote() {
   var quotes = [
     {
@@ -40,4 +47,27 @@ function newQuote() {
   var randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
   document.getElementById("text").innerHTML = randomQuote.text;
   document.getElementById("author").innerHTML = randomQuote.source;
+  document
+    .getElementById("#tweet-quote")
+    .attr(
+      "href",
+      stringToClickToTweetURL('"' + randQuote.text + '" - ' + randQuote.source)
+    );
+}
+
+function stringToClickToTweetURL(str) {
+  // Convert to Click to Tweet URL
+  var stringToConvert = str
+    .split(" ")
+    .join("%20")
+    .split("@")
+    .join("%40")
+    .split("!")
+    .join("%21");
+
+  // Put 'Click to Tweet' URL suffix at the begining
+  var resultString = "https://twitter.com/intent/tweet?text=" + stringToConvert;
+
+  // Return properly formatted "Click to Tweet URL"
+  return resultString;
 }
